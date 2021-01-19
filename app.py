@@ -1,11 +1,10 @@
 from flask import Flask, render_template, send_from_directory
 import os
 
-app = Flask(__name__, static_folder='/frontend/build')
+app = Flask(__name__)
 
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
+@app.route('/')
 def index(path):
     return send_from_directory(app.static_folder, 'index.html')
 

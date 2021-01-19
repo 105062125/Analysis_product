@@ -1,11 +1,22 @@
-from flask import Flask, render_template, send_from_directory
-import os
+from flask_cors import CORS, cross_origin
+from flask import Flask, render_template, send_from_directory, request, jsonify
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='frontend/build', static_url_path='')
+CORS(app)
+
+
+@app.route('/api')
+def Welcome():
+    return "Welcome to the API!!!"
+
+
+@app.route('/api/justpie/')
+def GeneratePie():
+    return "generate"
 
 
 @app.route('/')
-def index(path):
+def serve():
     return send_from_directory(app.static_folder, 'index.html')
 
 

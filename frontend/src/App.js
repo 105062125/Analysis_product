@@ -1,8 +1,20 @@
 import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
+  const [currentTime, setCurrentTime] = useState(0);
+
+  useEffect(() => {
+    fetch('/time').then(res => res.text()).then(data => {
+      data = JSON.parse(data);
+      setCurrentTime(data.time);
+      // console.log(data)
+    })
+  }, []);
+
   return (
+    
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -17,7 +29,9 @@ function App() {
         >
           Learn React
         </a>
+        <p>The current time is {currentTime}.</p>
       </header>
+      
     </div>
   );
 }

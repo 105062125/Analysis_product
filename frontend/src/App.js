@@ -1,39 +1,20 @@
-import logo from './logo.svg';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './App.css';
+import Test from './component/Test'
+import Timer from './component/Timer'
+import JSTimer from './component/JSTimer'
 
-function App() {
-  const [currentTime, setCurrentTime] = useState(0);
-
-  useEffect(() => {
-    fetch('/time').then(res => res.text()).then(data => {
-      data = JSON.parse(data);
-      setCurrentTime(data.time);
-      // console.log(data)
-    })
-  }, []);
-
-  return (
-    
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <p>The current time is {currentTime}.</p>
+class App extends React.Component {
+  render(){
+    return(
+      <header>
+        <Test/>
+        <Timer/>
+        <JSTimer/>
       </header>
-      
-    </div>
-  );
+    )
+  }
 }
+
 
 export default App;

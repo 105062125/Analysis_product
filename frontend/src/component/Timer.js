@@ -12,12 +12,9 @@ function Timer() {
   }, []);
 
   return (
-    <header>
       <div>
         <p>Timer: API time is {currentTime}.</p>
-        <p>Timer: JS time is {new Date().toLocaleTimeString()}.</p>
       </div>
-    </header>
   );
 }
 

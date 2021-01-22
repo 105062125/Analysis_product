@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { Component } from "react";
 
+export default class JSTimer extends Component {
+  state = {
+    date: new Date()
+  };
 
-function JSTimer() {
-  return (
-      <div>
-        <p>Timer: JS time is {new Date().toLocaleTimeString()}.</p>
-      </div>
-  );
+  componentDidMount() {
+    this.updateTimer();
+  }
+
+  updateTimer() {
+    setInterval(() => {
+      this.setState({
+        date: new Date()
+      });
+    }, 1000);
+  }
+
+  render() {
+    return <div>現在時間是: {this.state.date.toLocaleTimeString()}</div>;
+  }
 }
-
-export default JSTimer;

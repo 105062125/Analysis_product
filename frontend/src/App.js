@@ -13,7 +13,8 @@ class App extends React.Component {
     return(
       <div>
         <Navbar />
-        <Route path="/" exact component={Test} />
+        <Route exact path="/" component={Test} />
+        <Route path="/Test" component={Test} />
         <Route path="/Timer" component={Timer} />
         <Route path="/JSTimer" component={JSTimer} />
         <Route path="/Name" component={Name} />

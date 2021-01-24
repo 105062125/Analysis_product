@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+
 export default class JSTimer extends Component {
   state = {
     date: new Date()

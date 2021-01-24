@@ -9,6 +9,7 @@ function Timer() {
       data = JSON.parse(data);
       setCurrentTime(data.time);
     })
+
   }, []);
 
   return (

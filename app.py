@@ -11,17 +11,25 @@ def get_current_time():
     return {'time': time.time()}
 
 
-@app.route('/api')
+@app.route('/testpost', methods=['POST'])
+def testpost():
+    if not request.json:
+        return {'content': "not a json post"}
+    data = request.get_json()
+    return {'content': data['sentence']}
+
+
+@ app.route('/api')
 def Welcome():
     return "Welcome to the API!!!"
 
 
-@app.route('/api/justpie/')
+@ app.route('/api/justpie/')
 def GeneratePie():
     return "generate"
 
 
-@app.route('/')
+@ app.route('/')
 def serve():
     return send_from_directory(app.static_folder, 'index.html')
 

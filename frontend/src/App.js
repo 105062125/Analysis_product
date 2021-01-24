@@ -11,8 +11,7 @@ import function_display from './component/function_display'
 class App extends React.Component {
   render(){
     return(
-
-      <div className="container">
+      <div>
         <Navbar />
         <Route path="/" exact component={Test} />
         <Route path="/Timer" component={Timer} />

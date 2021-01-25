@@ -6,6 +6,7 @@ import Timer from './component/Timer'
 import JSTimer from './component/JSTimer'
 import Name from './component/name'
 import Navbar from './component/navbar'
+import GetDbUser from './component/GetDbUser'
 import function_display from './component/function_display'
 
 class App extends React.Component {
@@ -18,6 +19,7 @@ class App extends React.Component {
         <Route path="/Timer" component={Timer} />
         <Route path="/JSTimer" component={JSTimer} />
         <Route path="/Name" component={Name} />
+        <Route path="/GetDbUser" component={GetDbUser} />
         <Route path="/function_display" component={function_display} />
       </div>
 

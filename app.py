@@ -1,17 +1,37 @@
 from flask_cors import CORS, cross_origin
+from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, send_from_directory, request, jsonify
 import time
+import os
 
+basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__, static_folder='frontend/build', static_url_path='')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
+    os.path.join(basedir, 'test.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 CORS(app)
 
 
-@app.route('/time', methods=['GET'])
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80))
+    email = db.Column(db.String(120))
+
+    def __init__(self, username, email):
+        self.username = username
+        self.email = email
+
+    def __repr__(self):
+        return '<User %r>' % self.username
+
+
+@ app.route('/time', methods=['GET'])
 def get_current_time():
     return {'time': time.time()}
 
 
-@app.route('/testpost', methods=['POST'])
+@ app.route('/testpost', methods=['POST'])
 def testpost():
     if not request.json:
         return {'content': "not a json post"}
@@ -27,6 +47,39 @@ def Welcome():
 @ app.route('/api/justpie/')
 def GeneratePie():
     return "generate"
+
+
+@ app.route('/get_all_user')
+def get_all_user():
+    user_list = []
+    for user in User.query.all():
+        user_list.append([str(user.username), str(user.email)])
+    return {'user_list': user_list}
+
+
+@ app.route('/create_user/<username>/<email>')
+def create_user(username, email):
+    u1 = User(username=username, email=email)
+    db.session.add(u1)
+    db.session.commit()
+    print("create user successfully")
+    return send_from_directory(app.static_folder, 'index.html')
+
+
+@ app.route('/create_all_user')
+def create_all_user():
+    db.create_all()
+    u1 = User(username='john', email='john@gmail.com')
+    u2 = User(username='susan', email='susan@gmail.com')
+    u3 = User(username='mary', email='mary@gmail.com')
+    u4 = User(username='david', email='david@gmail.com')
+    db.session.add(u1)
+    db.session.add(u2)
+    db.session.add(u3)
+    db.session.add(u4)
+    db.session.commit()
+    print("create db successfully")
+    return send_from_directory(app.static_folder, 'index.html')
 
 
 @ app.route('/')

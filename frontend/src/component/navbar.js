@@ -43,6 +43,11 @@ const Navbar = () => {
               Name
             </Link>
           </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/GetDbUser">
+              GetDbUser
+            </Link>
+          </li>
           <li className="nav-item dropdown">
             <Link
               className="nav-link dropdown-toggle"

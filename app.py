@@ -1,29 +1,20 @@
 from flask_cors import CORS, cross_origin
-from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, send_from_directory, request, jsonify
+from database import db
+from models import User
 import time
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
+
 app = Flask(__name__, static_folder='frontend/build', static_url_path='')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
     os.path.join(basedir, 'test.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+db.init_app(app)
+
+# CORS can let this app use api in same localhost
 CORS(app)
-
-
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80))
-    email = db.Column(db.String(120))
-
-    def __init__(self, username, email):
-        self.username = username
-        self.email = email
-
-    def __repr__(self):
-        return '<User %r>' % self.username
 
 
 @ app.route('/time', methods=['GET'])

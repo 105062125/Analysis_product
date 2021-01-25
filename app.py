@@ -54,7 +54,7 @@ def create_user(username, email):
     db.session.add(u1)
     db.session.commit()
     print("create user successfully")
-    return send_from_directory(app.static_folder, 'index.html')
+    return {'status': 'upload successfully'}
 
 
 @ app.route('/create_all_user')
@@ -78,6 +78,6 @@ def serve():
     return send_from_directory(app.static_folder, 'index.html')
 
 
-# test
+# start from here
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import EasyForm from './easyform'
 
 function GetDbUser() {
 
@@ -12,7 +12,7 @@ function GetDbUser() {
         data = JSON.parse(data);
         // console.log(data)
         const UserList = data['user_list'].map((data) =>
-          <li>{'Name:'+data[0]+', Email:'+data[1]}</li>
+          <li key={data}>{'Name:'+data[0]+', Email:'+data[1]}</li>
         );
         setUserList(UserList)
         // console.log("hi")
@@ -26,6 +26,9 @@ function GetDbUser() {
   return (
       <div>
         <ul>Name List in Database: {currentUserList}</ul>
+        <div>
+         <EasyForm/>
+        </div>
       </div>
   );
 }

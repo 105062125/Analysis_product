@@ -2,7 +2,7 @@
 
 https://analysis-product.herokuapp.com/
 
-Web built by **ReactJS + Flask + heroku**
+Web built by **ReactJS + Flask + SQlite + Heroku**
 
 ## Frontend
 

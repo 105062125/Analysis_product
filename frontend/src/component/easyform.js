@@ -21,7 +21,6 @@ class EasyForm extends React.Component {
             data = JSON.parse(data);
             
         })
-        event.preventDefault()
     }
 
     render() {

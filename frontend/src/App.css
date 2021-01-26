@@ -28,6 +28,31 @@
   color: #61dafb;
 }
 
+.logo {
+  float: left;
+  width: 120px;
+  height: 31px;
+  margin-right: 30px;
+  margin-left: 30px;
+}
+.Apptitle {
+  font-size: large;
+  color: #fff;
+  text-align: center;
+  font-weight: bolder;
+}
+.Footer {
+  text-align: center;
+}
+
+.ant-row-rtl .logo {
+  float: right;
+  margin: 16px 0 16px 24px;
+}
+
+.site-layout-background {
+  background: #fff;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

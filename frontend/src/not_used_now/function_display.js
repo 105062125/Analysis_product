@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import func1 from './func1'
-import func2 from './func2'
+import func1 from '../component/func1'
+import func2 from '../component/func2'
 
 class function_display extends React.Component {
     render() {

@@ -1,8 +1,12 @@
 import React from 'react';
-
+import { Spin } from 'antd';
 class func1 extends React.Component {
     render() {
-      return <h1>func1</h1>;
+      return (
+        <Spin size="large"/>
+        
+        
+      ) 
     }
 }
 

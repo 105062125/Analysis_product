@@ -2,9 +2,9 @@ import React from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
 import 'antd/dist/antd.css';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Tag } from 'antd';
 import { Link } from 'react-router-dom';
-import { CodeSandboxOutlined, DotChartOutlined, StockOutlined } from '@ant-design/icons';
+import { CodeSandboxOutlined, DotChartOutlined, StockOutlined,FacebookOutlined } from '@ant-design/icons';
 import logo from '../src/logo_main.svg';
 import Home from './component/Home'
 import Timer from './component/Timer'
@@ -14,7 +14,7 @@ import Name from './component/name'
 import GetDbUser from './component/GetDbUser'
 import func1 from './component/func1'
 import func2 from './component/func2'
-
+import func3 from './component/func3'
 const { SubMenu } = Menu;
 const { Header, Content, Sider, Footer} = Layout;
 class App extends React.Component {
@@ -69,19 +69,19 @@ class App extends React.Component {
             Func2
               <Link className="nav-link" to="/func2"></Link>
             </Menu.Item>
+            <Menu.Item key="7">
+            Func3
+              <Link className="nav-link" to="/func3"></Link>
+            </Menu.Item>
 
           </SubMenu>
           <SubMenu key="sub2" icon={<DotChartOutlined />} title="Data Process">
-            <Menu.Item key="7">option5</Menu.Item>
-            <Menu.Item key="8">option6</Menu.Item>
-            <Menu.Item key="9">option7</Menu.Item>
-            <Menu.Item key="10">option8</Menu.Item>
+            <Menu.Item key="8">option5</Menu.Item>
+            <Menu.Item key="9">option6</Menu.Item>
           </SubMenu>
           <SubMenu key="sub3" icon={<StockOutlined />} title="Stock">
-            <Menu.Item key="11">option9</Menu.Item>
-            <Menu.Item key="12">option10</Menu.Item>
-            <Menu.Item key="13">option11</Menu.Item>
-            <Menu.Item key="14">option12</Menu.Item>
+            <Menu.Item key="10">option9</Menu.Item>
+
           </SubMenu>
         </Menu>
       </Sider>
@@ -102,12 +102,23 @@ class App extends React.Component {
           <Route path="/GetDbUser" component={GetDbUser} />
           <Route path="/func1" component={func1} />
           <Route path="/func2" component={func2} />
+          <Route path="/func3" component={func3} />
         </Content>
       </Layout>
       
       
     </Layout>
-    <Footer className="Footer">Copyright © KEVIN CHEN</Footer>
+    <Footer className="Footer">Copyright © KEVIN CHEN
+    <a href="https://www.facebook.com/chen.kevin.3785/">
+      <div>
+        <Tag icon={<FacebookOutlined />} color="#3b5999">
+          Facebook
+        </Tag>
+      </div>
+    </a>
+    
+    
+    </Footer>
   </Layout>
 
     )

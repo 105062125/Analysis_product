@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import { Layout, Menu } from 'antd';
 import { Link } from 'react-router-dom';
-import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+import { CodeSandboxOutlined, DotChartOutlined, StockOutlined } from '@ant-design/icons';
 import logo from '../src/logo_main.svg';
 import Home from './component/Home'
 import Timer from './component/Timer'
@@ -44,7 +44,7 @@ class App extends React.Component {
               <Link className="nav-link" to="/"></Link>
           </Menu.Item>
 
-          <SubMenu key="sub1" icon={<UserOutlined />} title="Function Test">
+          <SubMenu key="sub1" icon={<CodeSandboxOutlined />} title="Function Test">
             <Menu.Item key="1">
               Timer
               <Link className="nav-link" to="/Timer"></Link>
@@ -71,13 +71,13 @@ class App extends React.Component {
             </Menu.Item>
 
           </SubMenu>
-          <SubMenu key="sub2" icon={<LaptopOutlined />} title="Data Process">
+          <SubMenu key="sub2" icon={<DotChartOutlined />} title="Data Process">
             <Menu.Item key="7">option5</Menu.Item>
             <Menu.Item key="8">option6</Menu.Item>
             <Menu.Item key="9">option7</Menu.Item>
             <Menu.Item key="10">option8</Menu.Item>
           </SubMenu>
-          <SubMenu key="sub3" icon={<NotificationOutlined />} title="Stock">
+          <SubMenu key="sub3" icon={<StockOutlined />} title="Stock">
             <Menu.Item key="11">option9</Menu.Item>
             <Menu.Item key="12">option10</Menu.Item>
             <Menu.Item key="13">option11</Menu.Item>

@@ -2,6 +2,7 @@ from flask_cors import CORS, cross_origin
 from flask import Flask, render_template, send_from_directory, request, jsonify
 from database import db
 from models import User
+from fetch_stock_data import fetch_stock
 import time
 import os
 
@@ -35,9 +36,10 @@ def Welcome():
     return "Welcome to the API!!!"
 
 
-@ app.route('/api/justpie/')
-def GeneratePie():
-    return "generate"
+@ app.route('/fetch_stock')
+def stock_and_strategy():
+    data = fetch_stock()
+    return data
 
 
 @ app.route('/get_all_user')

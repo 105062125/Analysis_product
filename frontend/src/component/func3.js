@@ -1,70 +1,106 @@
-import { Table, Tag} from 'antd';
+import { Table, Tag,Button} from 'antd';
 import React from 'react';
 
 const columns = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
+    title: '日期',
+    dataIndex: 'date',
+    key: 'date',
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
+    title: '開盤價',
+    dataIndex: 'open',
+    key: 'open',
   },
   {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
+    title: '最高價',
+    dataIndex: 'high',
+    key: 'high',
   },
   {
-    title: 'Actions',
-    key: 'actions',
-    dataIndex: 'actions',
-    render: actions => (
-        <>
-          {actions.map(actions => {
-            let color = actions==='sell' ? 'red' : 'green';
+    title: '最低價',
+    key: 'low',
+    dataIndex: 'low',
+  },
+  {
+    title: '收盤價',
+    key: 'close',
+    dataIndex: 'close',
+  },
+  {
+    title: '漲跌價差',
+    key: 'spread',
+    dataIndex: 'spread',
+    render: spread => (
+      <>
+        {spread.map(spread => {
+          let color = spread[0]==='-' ? 'red' : 'green';
 
-            return (
-              <Tag color={color} key={actions}>
-                {actions.toUpperCase()}
-              </Tag>
-            );
-          })}
-        </>
-      ),
-  },
+          return (
+            <Tag color={color} >
+              {spread}
+            </Tag>
+          );
+        })}
+      </>
+    ),
+  }
 ];
 
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    actions: ['buy'],
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    actions: ['sell'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    actions: ['sell'],
-  },
-];
+// {
+//   title: 'Actions',
+//   key: 'actions',
+//   dataIndex: 'actions',
+  // render: actions => (
+  //     <>
+  //       {actions.map(actions => {
+  //         let color = actions==='sell' ? 'red' : 'green';
+
+  //         return (
+  //           <Tag color={color} key={actions}>
+  //             {actions.toUpperCase()}
+  //           </Tag>
+  //         );
+  //       })}
+  //     </>
+  //   ),
+// },
 
 class func3 extends React.Component {
+    constructor(props) {
+        super(props);
+     
+        this.state = {
+          data: null,
+          
+        };
+        this.fetch_stock = this.fetch_stock.bind(this);
+      }
+    
+    fetch_stock() {
+      fetch('/fetch_stock')
+        .then(response => response.text())
+        .then(data => {
+          data = JSON.parse(data);
+          this.setState({
+            data: data.data
+          });
+          // console.log(data)
+        });
+    }
+    // componentDidMount() {
+        
+    // }
+
     render() {
       return (
-        <Table columns={columns} dataSource={data} />
+        <div>
+          <h3>Stock Fetch</h3>
+          <Button type="primary" onClick={this.fetch_stock}>Run!</Button>
+        <Table columns={columns} dataSource={this.state.data} size="small" />
+        </div>
+        
+        
       ) 
     }
 }

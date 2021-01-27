@@ -9,7 +9,6 @@ enum34==1.1.10
 Flask==1.1.2
 Flask-Cors==3.0.10
 Flask-SQLAlchemy==2.4.4
-futures==3.3.0
 gunicorn==19.10.0
 idna==2.10
 isort==4.3.21

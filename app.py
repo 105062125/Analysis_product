@@ -2,7 +2,7 @@ from flask_cors import CORS, cross_origin
 from flask import Flask, render_template, send_from_directory, request, jsonify
 from database import db
 from models import User
-from fetch_stock_data import fetch_stock
+from fetch_stock_data import fetch_stock, fetch_stock_close
 import time
 import os
 
@@ -34,6 +34,12 @@ def testpost():
 @ app.route('/api')
 def Welcome():
     return "Welcome to the API!!!"
+
+
+@ app.route('/fetch_stock_close')
+def stock_close():
+    data = fetch_stock_close()
+    return data
 
 
 @ app.route('/fetch_stock')

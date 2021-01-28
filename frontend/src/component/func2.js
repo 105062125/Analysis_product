@@ -46,6 +46,10 @@ class func2 extends React.Component {
         <Legend />
         {/* <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} /> */}
         <Line type="monotone" dataKey="close" stroke="#82ca9d" dot={false} />
+        <Line type="monotone" dataKey="5MA" stroke="#FF2D2D" dot={false} />
+        <Line type="monotone" dataKey="10MA" stroke="#0072E3" dot={false} />
+        <Line type="monotone" dataKey="k" stroke="#46A3FF" dot={false} />
+        <Line type="monotone" dataKey="d" stroke="#FF2D2D" dot={false} />
       </LineChart>
         </div>
         

@@ -19,7 +19,7 @@ def calculate_kd(high_array, low_array, close_array):
     np_format_high_array = numpy.array(high_array)
     np_format_low_array = numpy.array(low_array)
     k, d = talib.STOCH(np_format_high_array,
-                       np_format_low_array, np_format_close_array)
+                       np_format_low_array, np_format_close_array, fastk_period=9, slowk_period=3, slowd_period=3, slowk_matype=1, slowd_matype=1)
 
     array_format_k_output = np.where(np.isnan(k), 0, k)
     array_format_d_output = np.where(np.isnan(d), 0, d)

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Input} from 'antd';
 import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Brush
 } from 'recharts';
 const { Search } = Input;
 
@@ -77,9 +77,9 @@ class func2 extends React.Component {
         <YAxis />
         <Tooltip />
         <Legend />
-        {/* <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} /> */}
         <Line type="monotone" dataKey="k" stroke="#46A3FF" dot={false} />
         <Line type="monotone" dataKey="d" stroke="#FF2D2D" dot={false} />
+        <Brush dataKey="date"/> 
       </LineChart>
         </div>
         

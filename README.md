@@ -51,3 +51,21 @@ I already set **_Heroku_** to this github repo
 Used Sqlite to store data.
 
 You can use **_TablePlus_** to watch db file.
+
+## Difficulties
+
+---
+
+1. futures == 3.3.0
+
+pip3 doesn't support futures, just remove it from requirements.txt
+
+2. TA_lib
+
+If you only add TA_lib in your requirements, it will failed to compile in **_Heroku_**.
+Follow the steps below
+
+- Delete TA_lib in requirements.txt
+- Go to Settings in **_Heroku_**, you will see Buildpacks.
+- Add "https://github.com/numrut/heroku-buildpack-python-talib" in your buildpacks.
+- Done

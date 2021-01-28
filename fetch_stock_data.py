@@ -23,9 +23,6 @@ def calculate_kd(high_array, low_array, close_array):
 
     array_format_k_output = np.where(np.isnan(k), 0, k)
     array_format_d_output = np.where(np.isnan(d), 0, d)
-    print(array_format_k_output)
-    print("---")
-    print(array_format_d_output)
     return array_format_k_output, array_format_d_output
 
 
@@ -38,8 +35,8 @@ def calculate_sma(close_array, avg_number):
  # 抓取連續半年股票收盤價
 
 
-def fetch_stock_close():
-    stock = "2330"
+def fetch_stock_close(stock_number):
+    stock = str(stock_number)
     six_month = []
     for i in range(6):
         today = date.today() + relativedelta(months=-i)
@@ -85,8 +82,8 @@ def fetch_stock_close():
 # 抓取連續半年股票 ["日期", "成交股數", "成交金額", "開盤價", "最高價", "最低價", "收盤價", "漲跌價差", "成交筆數"]
 
 
-def fetch_stock():
-    stock = "2330"
+def fetch_stock(stock_number):
+    stock = str(stock_number)
     six_month = []
     for i in range(6):
         today = date.today() + relativedelta(months=-i)

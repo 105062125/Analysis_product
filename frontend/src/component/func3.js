@@ -1,6 +1,7 @@
-import { Table, Tag,Button} from 'antd';
+import { Table, Tag, Input} from 'antd';
 import React from 'react';
 
+const { Search } = Input;
 const columns = [
   {
     title: '日期',
@@ -72,18 +73,32 @@ class func3 extends React.Component {
      
         this.state = {
           data: null,
+          loading: 0
           
         };
         this.fetch_stock = this.fetch_stock.bind(this);
       }
     
-    fetch_stock() {
-      fetch('/fetch_stock')
+    fetch_stock(stock_number){
+      const payload = {"stock_number":stock_number}
+      this.setState({
+        loading: 1
+      })
+
+      fetch('/fetch_stock',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+       })
         .then(response => response.text())
         .then(data => {
           data = JSON.parse(data);
           this.setState({
+            loading: 0,
             data: data.data
+            
           });
           // console.log(data)
         });
@@ -96,7 +111,8 @@ class func3 extends React.Component {
       return (
         <div>
           <h3>Stock Fetch</h3>
-          <Button type="primary" onClick={this.fetch_stock}>Run!</Button>
+          <Search style={{ padding:"10px 10px 10px 0px", width: 200 }} placeholder="代號" enterButton="Search" onSearch={value => this.fetch_stock(value)} loading={this.state.loading} />
+          {/* <Button type="primary" onClick={this.fetch_stock}>Run!</Button> */}
         <Table columns={columns} dataSource={this.state.data} size="small" />
         </div>
         

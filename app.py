@@ -36,15 +36,19 @@ def Welcome():
     return "Welcome to the API!!!"
 
 
-@ app.route('/fetch_stock_close')
+@ app.route('/fetch_stock_close', methods=['POST'])
 def stock_close():
-    data = fetch_stock_close()
+    request_json = request.get_json()
+    stock_number = request_json['stock_number']
+    data = fetch_stock_close(stock_number)
     return data
 
 
-@ app.route('/fetch_stock')
+@ app.route('/fetch_stock', methods=['POST'])
 def stock_and_strategy():
-    data = fetch_stock()
+    request_json = request.get_json()
+    stock_number = request_json['stock_number']
+    data = fetch_stock(stock_number)
     return data
 
 

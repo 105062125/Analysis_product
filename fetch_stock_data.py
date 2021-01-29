@@ -11,7 +11,65 @@ import talib
 import numpy
 from dateutil.relativedelta import relativedelta
 
-# 計算均線 close_array收盤價 avg_number看幾日平均
+
+def KD_strategy(money, stock_list):
+    # print(stock_list)
+    money_list = []
+    stock_number_list = []
+    # had_stock_number = 0
+    prev_k_large_than_d = 0
+    first_have_number_flag = 1
+    for i, today in enumerate(stock_list):
+        if i == 0:
+            money_list.append(money)
+            stock_number_list.append(0)
+        else:
+            money_list.append(money_list[-1])
+            stock_number_list.append(stock_number_list[-1])
+
+        if stock_list[i]['k'] != 0 and stock_list[i]['d'] != 0:
+            if first_have_number_flag:
+                if stock_list[i]['k'] > stock_list[i]['d']:
+                    prev_k_large_than_d = 1
+                else:
+                    prev_k_large_than_d = 0
+                first_have_number_flag = 0
+
+            if prev_k_large_than_d:
+                # print("k>d", i)
+                if stock_list[i]['k'] < stock_list[i]['d']:
+                    prev_k_large_than_d = 0
+                    if stock_number_list[-1] > 0:
+                        # 賣出
+                        # print("sell")
+                        stock_number_list[-1] = stock_number_list[-1] - 1
+                        money_list[-1] = float(money_list[-1]) + \
+                            float(str(stock_list[i]['close']))
+
+            else:
+                # print("k<d", i)
+                if stock_list[i]['k'] > stock_list[i]['d']:
+                    prev_k_large_than_d = 1
+                    if float(money_list[-1]) > float(str(stock_list[i]['close'])):
+                        # 買進
+                        # print("buy")
+                        stock_number_list[-1] = stock_number_list[-1] + 1
+                        money_list[-1] = float(money_list[-1]) - \
+                            float(str(stock_list[i]['close']))
+
+    for i, today_stock in enumerate(stock_list):
+        today_stock.setdefault('money', money_list[i])
+        today_stock.setdefault('have_stock_number', stock_number_list[i])
+        today_stock.setdefault(
+            'asset', round(float(money_list[i])+float(stock_number_list[i])*float(str(today_stock['close'])), 2))
+
+    asset_last = round(float(
+        money_list[-1])+float(stock_number_list[-1])*float(str(stock_list[-1]['close'])), 2)
+    kd_ratio = round(((asset_last - 1000)/1000)*100, 3)
+    # print(stock_list)
+    return stock_list, kd_ratio
+
+    # 計算均線 close_array收盤價 avg_number看幾日平均
 
 
 def calculate_kd(high_array, low_array, close_array):
@@ -38,7 +96,7 @@ def calculate_sma(close_array, avg_number):
 def fetch_stock_close(stock_number):
     stock = str(stock_number)
     six_month = []
-    for i in range(6):
+    for i in range(12):
         today = date.today() + relativedelta(months=-i)
         formatted_today = today.strftime('%y%m%d')
         today_date = '20'+formatted_today
@@ -75,7 +133,8 @@ def fetch_stock_close(stock_number):
         per_day.setdefault('k', k[i])
         per_day.setdefault('d', d[i])
 
-    data = {'data': temp_dict}
+    outcome, kd_ratio = KD_strategy(1000, temp_dict)
+    data = {'data': outcome, 'kd_ratio': kd_ratio}
     return data
 
 
@@ -173,4 +232,4 @@ def Close_price():
 
 
 if __name__ == "__main__":
-    calculate_sma()
+    fetch_stock_close("2330")

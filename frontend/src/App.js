@@ -22,7 +22,7 @@ class App extends React.Component {
     return(
 
     <Layout>
-    <Header className="header">
+    <Header className="header" >
       <div className="logo">
         <img src={logo} width="50" height="50" alt="logo"></img>
       </div>
@@ -31,7 +31,7 @@ class App extends React.Component {
       </Menu>
     </Header>
     <Layout>
-      <Sider width={200} className="site-layout-background">
+      <Sider  width={200} className="site-layout-background">
         <Menu
           theme="dark"
           mode="inline"
@@ -89,8 +89,10 @@ class App extends React.Component {
         <Content
           className="site-layout-background"
           style={{
+            overflow: 'auto',
             padding: 24,
             margin: 0,
+            maxHeight: "100vh",
             minHeight: "100vh",
           }}
         >

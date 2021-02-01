@@ -2,7 +2,7 @@ from flask_cors import CORS, cross_origin
 from flask import Flask, render_template, send_from_directory, request, jsonify
 from database import db
 from models import User
-from fetch_stock_data import fetch_stock, fetch_stock_close
+from backend_function.fetch_stock_data import fetch_stock, fetch_stock_close
 import time
 import os
 

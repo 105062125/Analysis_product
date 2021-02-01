@@ -69,8 +69,6 @@ def KD_strategy(money, stock_list):
     # print(stock_list)
     return stock_list, kd_ratio
 
-    # 計算均線 close_array收盤價 avg_number看幾日平均
-
 
 def calculate_kd(high_array, low_array, close_array):
     np_format_close_array = numpy.array(close_array)
@@ -83,6 +81,8 @@ def calculate_kd(high_array, low_array, close_array):
     array_format_d_output = np.where(np.isnan(d), 0, d)
     return array_format_k_output, array_format_d_output
 
+# 計算均線 close_array收盤價 avg_number看幾日平均
+
 
 def calculate_sma(close_array, avg_number):
 
@@ -90,7 +90,8 @@ def calculate_sma(close_array, avg_number):
     output = talib.SMA(np_format_array, avg_number)
     array_format_output = np.where(np.isnan(output), 0, output)
     return array_format_output
- # 抓取連續半年股票收盤價
+
+# 抓取連續半年股票收盤價
 
 
 def fetch_stock_close(stock_number):
